@@ -21,14 +21,22 @@ class Set {
     // Метод для объединения текущего множества с другим
     public Set union(Set otherSet) {
         HashSet<Integer> unionSet = new HashSet<>(this.elements);
-        unionSet.addAll(otherSet.getElements());
+        for (int element : otherSet.getElements()) {
+            if (!unionSet.contains(element)) {
+                unionSet.add(element);
+            }
+        }
         return new Set(unionSet);
     }
 
     // Метод для пересечения текущего множества с другим
     public Set intersection(Set otherSet) {
-        HashSet<Integer> intersectionSet = new HashSet<>(this.elements);
-        intersectionSet.retainAll(otherSet.getElements());
+        HashSet<Integer> intersectionSet = new HashSet<>();
+        for (int element : this.elements) {
+            if (otherSet.getElements().contains(element)) {
+                intersectionSet.add(element);
+            }
+        }
         return new Set(intersectionSet);
     }
 
